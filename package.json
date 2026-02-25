@@ -1,0 +1,39 @@
+{
+  "name": "omniseed",
+  "version": "0.0.2",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "web": "turbo dev --filter web",
+    "admin": "turbo dev --filter admin",
+    "lint": "ultracite lint",
+    "format": "ultracite format",
+    "test": "turbo test",
+    "analyze": "turbo analyze",
+    "bump-deps": "npx npm-check-updates --deep -u -x react-day-picker && pnpm install",
+    "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/design-system",
+    "migrate": "cd packages/database && npx drizzle-kit push",
+    "clean": "git clean -xdf node_modules"
+  },
+  "devDependencies": {
+    "@auto-it/all-contributors": "^11.3.0",
+    "@auto-it/first-time-contributor": "^11.3.0",
+    "@biomejs/biome": "1.9.4",
+    "@repo/typescript-config": "workspace:*",
+    "@turbo/gen": "^2.5.4",
+    "@types/node": "^22.15.29",
+    "tsup": "^8.5.0",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3",
+    "ultracite": "^4.2.6",
+    "vitest": "^3.2.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@10.11.1",
+  "type": "module",
+  "dependencies": {
+    "tailwindcss": "^4.1.8"
+  }
+}
