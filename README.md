@@ -77,12 +77,48 @@ pnpm admin
 
 실제 서비스 서버에 프로그램을 올리는 과정입니다.
 
+### 기본적인 단계
+
 ```bash
 # 1. 서비스 운영을 위한 최종 파일 만들기
 pnpm build --filter admin
 
 # 2. 만들어진 최종 파일(.next/standalone)을 사용해 서버에서 실행하기
 node apps/admin/.next/standalone/server.js
+```
+
+### AWS EC2 배포 방법
+
+기본적으로 macOS 기반에서 작성하였습니다. 
+
+#### 1. Terminal 실행 
+
+Terminal 앱을 실행합니다.
+
+#### 2. 서버 접속 
+
+```bash
+ssh -i [인증키 파일 경로] ubuntu@[EC2 서버 IP 주소]
+```
+
+인증키 파일 관련하여 권한 오류가 있는경우 400 권한을 주어줍니다.
+```bash
+chmod 400 [인증키 파일 경로]
+```
+
+#### 3. 서비스 배포 및 실행 
+
+서버 접속이 완료되었다면, 다음과 같이 서비스 빌드 및 실행을 합니다. 
+
+```bash
+# 서비스 최종 파일 만들기(빌드)
+pnpm build --filter admin
+
+# pm2를 이용해 만들어진 서버를 실행하기
+pm2 start apps/admin/.next/standalone/server.js --name "admin"
+
+# 또는,
+pm2 restart --name "admin"
 ```
 
 ---
