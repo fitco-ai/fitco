@@ -98,7 +98,7 @@ Terminal 앱을 실행합니다.
 #### 2. 서버 접속 
 
 ```bash
-ssh -i [인증키 파일 경로] ubuntu@[EC2 서버 IP 주소]
+ssh -i [인증키 파일 경로] ec2-user@43.202.14.147
 ```
 
 인증키 파일 관련하여 권한 오류가 있는경우 400 권한을 주어줍니다.
@@ -111,14 +111,17 @@ chmod 400 [인증키 파일 경로]
 서버 접속이 완료되었다면, 다음과 같이 서비스 빌드 및 실행을 합니다. 
 
 ```bash
-# 서비스 최종 파일 만들기(빌드)
-pnpm build --filter admin
+# fitco-admin 이동
+cd fitco-admin
 
-# pm2를 이용해 만들어진 서버를 실행하기
-pm2 start apps/admin/.next/standalone/server.js --name "admin"
+# 최신 코드 받기
+git pull origin main
 
-# 또는,
-pm2 restart --name "admin"
+# 의존성 설치
+pnpm install
+
+# 서비스 재시작
+pm2 restart 0
 ```
 
 ---
